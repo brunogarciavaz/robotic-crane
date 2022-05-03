@@ -21,8 +21,7 @@ scene.add(camera);
 
 const light = new THREE.AmbientLight('#FFF');
 scene.add(light);
-
-const ws = new WebSocket('ws://localhost:3000/');
+const ws = new WebSocket(`ws://${window.location.host}`);
 const wsStatus = document.getElementById('ws-status');
 function updateWsStatus(e: Event) {
   if (!wsStatus) return;
@@ -55,7 +54,6 @@ function sendActuators(e: Event) {
 
 function updateUi (crane: ICrane) {
   Object.keys(crane).forEach((key) => {
-    console.log("looking for", key);
     const input = document.getElementsByName(key)[0];
     if (input) {
       input.value = crane[key];

@@ -24,7 +24,7 @@ function createCrane() {
     };
 }
 function wsSenderWrapper(ws) {
-    return function (data) {
+    return (data) => {
         ws.send(JSON.stringify(data));
     };
 }
