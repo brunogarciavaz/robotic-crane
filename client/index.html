@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script defer type="module" src="/index.ts"></script>
+  <link rel="stylesheet" type="module" href="/assets/style.css" />
+
+  <title>Basic 03</title>
+  
+</head>
+<body>
+  <main>
+    <aside class="dashboard">
+      <section class="dashboard__status">
+        <h2>Websocket Status: </h2>
+        <h3 id="ws-status"></h3>
+      </section>
+      <section>
+        <form class="dashboard__input-form" id="actuators">
+          <ul class="dashboard__input-list">
+            <li>
+              <h2>Lift</h2>
+              <input name="lift_elevation_mm" type="number">
+              mm
+            </li>
+            <li>
+              <h2>Swing</h2>
+              <input name="swing_rot_deg" type="number">
+              deg
+            </li>
+            <li>
+              <h2>Rail</h2>
+              <input name="rail_position_mm" type="number">
+              mm
+            </li>
+          </ul>
+          <input id="" class="button" type="submit">
+        </form>
+
+      </section>
+    </aside>
+    <div id="three">
+
+    </div>
+  </main>
+</body>
+</html>

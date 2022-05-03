@@ -1,0 +1,2 @@
+export const TELEMETRY_INTERVAL_MS = 50;
+export const CRANE_SIZE_MULTIPLIER = 1;
