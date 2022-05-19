@@ -10,12 +10,12 @@ export default function createStore(crane: ICrane) {
           const heightLimit = target.constraints.lift_height_mm
           - target.constraints.gripper_height_mm;
 
-          if (
-            value > heightLimit) {
-            animate(target[key], heightLimit, 3, (currLerp) => { target[key] = currLerp; });
-            return true;
-          }
-          animate(target[key], value, 3, (currLerp) => { target[key] = currLerp; });
+          animate(
+            target[key],
+            (value > heightLimit ? heightLimit : value),
+            3,
+            (currLerp) => { target[key] = currLerp; },
+          );
           return true;
         }
         case 'rail_position_mm': {

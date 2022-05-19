@@ -72,30 +72,31 @@ function updateStore(storeUpdate: Partial<ICrane>) {
   });
 }
 
+// TODO: type receiving messages
+ws.onmessage = (event) => {
+  const message: IMessage<ICrane> = JSON.parse(event.data);
+
+  if (message.type === 'crane_setup') {
+    console.log('setting up crane', message.payload);
+    const crane = buildCraneModel(message.payload);
+    store = createStore(message.payload, crane);
+    scene.add(crane);
+    updateStore(message.payload);
+    updateUi(message.payload);
+    const boundingBox = new THREE.Box3().setFromObject(crane);
+    const craneSize = new THREE.Vector3();
+    boundingBox.getSize(craneSize);
+    camera.position.y = craneSize.y + 2;
+  }
+  if (message.type === 'telemetry') {
+    console.log('receiving telemtry', message.payload);
+    updateStore(message.payload);
+  }
+};
+
 function render() {
   requestAnimationFrame(render);
   controls.update();
-  // TODO: type receiving messages
-  ws.onmessage = (event) => {
-    const message: IMessage<ICrane> = JSON.parse(event.data);
-
-    if (message.type === 'crane_setup') {
-      console.log('setting up crane', message.payload);
-      const crane = buildCraneModel(message.payload);
-      store = createStore(message.payload, crane);
-      scene.add(crane);
-      updateStore(message.payload);
-      updateUi(message.payload);
-      const boundingBox = new THREE.Box3().setFromObject(crane);
-      const craneSize = new THREE.Vector3();
-      boundingBox.getSize(craneSize);
-      camera.position.y = craneSize.y + 2;
-    }
-    if (message.type === 'telemetry') {
-      console.log('receiving telemtry', message.payload);
-      updateStore(message.payload);
-    }
-  };
   renderer.render(scene, camera);
 }
 
